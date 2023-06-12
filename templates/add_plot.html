@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+  <style>
+
+    h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="file"],
+input[type="number"] {background-color: #ee1717}
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+  </style>
+</head>
+  <h1>Add Plot</h1>
+  <!-- Add plot form -->
+  <form action="/add_plot" method="POST" enctype="multipart/form-data">
+    <label for="plot_title">Plot Title:</label>
+    <input type="text" id="plot_title" name="plot_title">
+
+    <label for="plot_description">Plot Description:</label>
+    <textarea id="plot_description" name="plot_description"></textarea>
+
+    <label for="plot_photo">Plot Photo:</label>
+    <input type="file" id="plot_photo" name="plot_photo"accept="image/*" required>
+
+    <label for="plot_contact">Contact Information:</label>
+    <input type="text" id="plot_contact" name="plot_contact">
+
+    <label for="plot_location">Location:</label>
+    <input type="text" id="plot_location" name="plot_location">
+
+    <label for="plot_price">Price:</label>
+    <input type="number" id="plot_price" name="plot_price">
+
+    <input type="submit" value="Add Plot">
+  </form>
+
+
+{% endblock %}

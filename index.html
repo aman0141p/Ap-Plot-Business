@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add colorful styles here */
+
+        h1 { text-align: center;
+    margin-top: 50px;
+            color: #FF5733;
+        }
+
+        h2 {
+            color:#006600;
+        }
+
+        li {
+            background-color: #E8F8FF;
+        }
+
+        h3 {
+            color: #C70039;
+        }
+
+        p {
+            color: #900C3F;
+        }
+
+        a {
+            color: #0000FF;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Dashboard!</h1>
+
+    <h2>My Plots</h2>
+    <ul>
+        {% for plot in plots %}
+        <li>
+            <h3>{{ plot.title }}</h3>
+            <p>{{ plot.description }}</p>
+            <p>Contact: {{ plot.contact }}</p>
+            <p>Location: {{ plot.location }}</p>
+            <p>Price: {{ plot.price }}</p>
+            <p>seller:{{plot.seller}}</p>
+            {% if plot.photo %}
+                <img src="{{ url_for('static', filename='uploads/' + plot.photo) }}" alt="Plot Photo">
+            {% endif %}
+
+            {% if 'username' in session and plot.seller == session['username'] %}
+            <a href="/edit_plot/{{ plot.id }}">Edit</a>
+            <a href="/delete_plot/{{ plot.id }}">Delete</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>My Profile</h2>
+    <p>Username: {{ username }}</p>
+    <p>Email: {{ email }}</p>
+
+    <a href="/add_plot">Add Plot</a>
+    <a href="/logout">Logout</a>
+<style>
+        ul li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        form {
+            display: inline;
+        }
+
+        button {
+            margin-left: 10px;
+            background-color: #ff0000;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+    </style>
+   <ul>
+  {% for plot in plots %}
+  <li>
+    <h3>{{ plot.title }}</h3>
+    <p>{{ plot.description }}</p>
+    <p>Contact: {{ plot.contact }}</p>
+    <p>Location: {{ plot.location }}</p>
+    <p>Price: {{ plot.price }}</p>
+      <p>seller:{{plot.seller}}</p>
+<img width="original" height="50" src="{{ url_for('static', filename='uploads/' + plot.photo) }}" alt="Plot Photo" class="plot-photo">
+    {% if 'username' in session %}
+      {% if plot.seller == session['username'] %}
+        <form class="delete-form">
+          <input type="hidden" name="plot_id" value="{{ loop.index - 1 }}">
+          <button type="button" class="delete-button">Delete</button>
+        </form>
+      {% endif %}
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+
+<script>
+  // Attach event listeners to delete buttons
+  var deleteButtons = document.getElementsByClassName('delete-button');
+  Array.from(deleteButtons).forEach(function(button) {
+    button.addEventListener('click', function() {
+      if (confirm('Are you sure you want to delete this plot?')) {
+        var form = button.parentElement;
+        var plotId = form.querySelector('input[name="plot_id"]').value;
+
+        fetch('/delete_plot', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: 'plot_id=' + encodeURIComponent(plotId)
+        })
+        .then(function(response) {
+          if (response.ok) {
+            // Handle the response, if needed
+            // For example, you can update the UI or display a success message
+            location.reload(); // Refresh the page after successful deletion
+          }
+        })
+        .catch(function(error) {
+          console.error('Error:', error);
+        });
+      }
+    });
+  });
+</script>
+    <style>
+    .corner-image {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: originalpx;
+      height: 100px;
+      z-index: 9999;
+    }
+  </style>
+<img src="{{ url_for('static', filename='uploads/20230611_182308.jpg') }}" alt="Corner Image" class="corner-image">
+<div style="position: fixed; bottom: 110px; right: 20px;">
+  <video width="250" height="150" controls autoplay muted>
+    <source src="{{ url_for('static', filename='uploads/istockphoto-1168188878-640_adpp_is.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+<footer style="background-color: #e6f1f6;">
+  <p style="color: #FFFFFF0; text-align: center;">&copy; 2023 AP Property Business. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

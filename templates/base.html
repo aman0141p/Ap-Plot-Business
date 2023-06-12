@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Website Title</title>
+  <!-- Include CSS and JavaScript files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+  <header>
+    <!-- Header content -->
+  </header>
+
+  <nav>
+    <!-- Navigation menu -->
+  </nav>
+
+  <main>
+    {% block content %}
+    <!-- Default content for individual templates -->
+    {% endblock %}
+  </main>
+
+  <footer>
+    <!-- Footer content -->
+  </footer>
+</body>
+</html>

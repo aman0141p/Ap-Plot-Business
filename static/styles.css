@@ -1,0 +1,11 @@
+<ul>
+    {% for plot in plots %}
+    <li style="margin-bottom: 10px; padding: 10px; background-color: #f0f0f0;">
+        {{ plot }}
+        <form action="/delete_plot" method="POST" style="display: inline;">
+            <input type="hidden" name="plot_id" value="{{ loop.index - 1 }}">
+            <button type="submit" style="margin-left: 10px;">Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>

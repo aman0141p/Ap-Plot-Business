@@ -1,0 +1,109 @@
+<!-- dashboard.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add colorful styles here */
+
+        h1 {
+            color: #FF5733;
+        }
+
+        h2 {
+            color: #FFC300;
+        }
+
+        li {
+            background-color: #E8F8FF;
+        }
+
+        h3 {
+            color: #C70039;
+        }
+
+        p {
+            color: #900C3F;
+        }
+
+        a {
+            color: #FF5733;
+        }
+
+        .user-photo {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Dashboard!</h1>
+
+    <h2>My Plots</h2>
+    <ul>
+        {% for plot in my_plots %}
+        <li>
+            <h3>{{ plot.title }}</h3>
+            <p>{{ plot.description }}</p>
+            <p>Contact: {{ plot.contact }}</p>
+            <p>Location: {{ plot.location }}</p>
+            <p>Price: {{ plot.price }}</p>
+            <img src="{{ plot.photo }}" alt="Plot Photo" class="user-photo">
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>My Profile</h2>
+    <p>Username: {{ username }}</p>
+    <p>Email: {{ email }}</p>
+    <img src="{{ user_photo }}" alt="User Photo" class="user-photo">
+
+    <a href="/">Go Back</a>
+</body>
+</html>
